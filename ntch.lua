@@ -1,4 +1,4 @@
--- Neptunium Chat (build2 | July 21st, 2019) | Built on FlexChat
+-- Neptunium Chat (v1.03 WIP | December 7th, 2019) | Thanks to Mr. Reflectronic!
  
 term = require("term")
 component = require("component")
@@ -18,8 +18,74 @@ computer.beep(100, 0.25)
 computer.beep(150, 0.25)
 computer.beep(200, 0.5)
  
-print("Welcome to Neptunium Chat (Build 2), built upon (and compatible with) FlexChat! \n")
-print("Please select the port you'd like to communicate through:")
+-- print("Welcome to Neptunium Chat v1.03!")
+print("Welcome to Neptunium Chat v1.03 (WIP)!")
+detectedmem = computer.totalMemory()
+
+while detectedmem < 384000 do -- If total memory is less than 384KB abort loading
+    gpu.setForeground(0x000000)
+    gpu.setBackground(0x8B0000)
+    gpu.fill(1, 1, w, h, " ")
+    term.clear()
+    print("This machine lacks sufficient memory to continue running this program. Terminating...")
+    os.sleep(5)
+    os.exit
+end
+
+print("Please choose a theme for your client:")
+print("(Some themes might have issues on low-end hardware)")
+print("[D]efault | [F]all | [H]eat | [I]nverted | [L]ight | [S]ummer ")
+usertheme = io.read()
+ 
+while usertheme == "D" or usertheme == "d" do -- Select the default theme
+    gpu.setForeground(0xFFFFFF)
+    gpu.setBackground(0x000000)
+    gpu.fill(1, 1, w, h, " ")
+    term.clear()
+end
+ 
+while usertheme == "I" or usertheme == "i" do -- Select the inverted theme (better than light *I* guess :P)
+    gpu.setForeground(0x000000)
+    gpu.setBackground(0xFFFFFF)
+    gpu.fill(1, 1, w, h, " ")
+    term.clear()
+end
+
+while usertheme == "L" or usertheme == "l" do -- Select the light theme (freak)
+    gpu.setForeground(0x000000)
+    gpu.setBackground(0xC0C0C0)
+    gpu.fill(1, 1, w, h, " ")
+    term.clear()
+end
+ 
+while usertheme == "S" or usertheme == "s" do -- Select the bright summer theme
+    gpu.setForeground(0x008000)
+    gpu.setBackground(0x0000FF)
+    gpu.fill(1, 1, w, h, " ")
+    term.clear()
+end
+
+while usertheme == "F" or usertheme == "f" do -- Select the warm fall theme
+    gpu.setForeground(0x808080)
+    gpu.setBackground(0x654321)
+    gpu.fill(1, 1, w, h, " ")
+    term.clear()
+end
+
+while usertheme == "DE" or usetheme == "de" do -- Select the debug theme (easter egg!)
+    gpu.setForeground(0x000000)
+    gpu.setBackground(0x008000)
+    gpu.fill(1, 1, w, h, " ")
+    term.clear()
+end
+
+while usertheme == nil do
+    print("Unknown theme selection.")
+    computer.beep(1500, 0.5)
+    usertheme = io.stdin:read()
+end
+
+print("Please select the port you'd like to communicate through (1 - 65535):")
 port = tonumber(term.read())
  
 while port == nil do
@@ -28,48 +94,13 @@ while port == nil do
     port = tonumber(io.stdin:read())
 end
  
-print("Please choose a theme for your client:")
-print("[D]efault, [I]nverted [L]ight, [S]ummer, [F]all")
-usertheme = io.read()
- 
-if usertheme == "D" or usertheme == "d" then -- Select the default theme
-    gpu.setForeground(0xFFFFFF)
-    gpu.setBackground(0x000000)
-    gpu.fill(1, 1, w, h, " ")
- 
-elseif usertheme == "I" or usertheme == "i" then -- Select the inverted theme (better than light *I* guess :P)
-    gpu.setForeground(0x000000)
-    gpu.setBackground(0xFFFFFF)
-    gpu.fill(1, 1, w, h, " ")
- 
-elseif usertheme == "L" or usertheme == "l" then -- Select the light theme (freak)
-    gpu.setForeground(0x000000)
-    gpu.setBackground(0xC0C0C0)
-    gpu.fill(1, 1, w, h, " ")
- 
-elseif usertheme == "S" or usertheme == "s" then -- Select the bright summer theme
-    gpu.setForeground(0x008000)
-    gpu.setBackground(0x0000FF)
-    gpu.fill(1, 1, w, h, " ")
- 
-elseif usertheme == "F" or usertheme == "f" then -- Select the warm fall theme
-    gpu.setForeground(0x808080)
-    gpu.setBackground(0x654321)
-    gpu.fill(1, 1, w, h, " ")
- 
-elseif usertheme == "DE" or usetheme == "de" then -- Select the debug theme (easter egg!)
-    gpu.setForeground(0x000000)
-    gpu.setBackground(0x008000)
-    gpu.fill(1, 1, w, h, " ")
- 
-else
-   end
- 
 print("Please insert an alias:")
 alias = term.read()
 alias = alias:gsub("\n", "")
  
 term.clear()
+
+print("You're connected!")
  
 width, height = term.getViewport()
 height = height + 1

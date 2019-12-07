@@ -17,19 +17,19 @@ term.clear()
 computer.beep(100, 0.25)
 computer.beep(150, 0.25)
 computer.beep(200, 0.5)
- 
+
 -- print("Welcome to Neptunium Chat v1.03!")
 print("Welcome to Neptunium Chat v1.03 (WIP)!")
 detectedmem = computer.totalMemory()
 
-while detectedmem < 384000 do -- If total memory is less than 384KB abort loading
+if detectedmem < 384000 then -- If total memory is less than 384KB abort loading
     gpu.setForeground(0x000000)
     gpu.setBackground(0x8B0000)
     gpu.fill(1, 1, w, h, " ")
     term.clear()
     print("This machine lacks sufficient memory to continue running this program. Terminating...")
     os.sleep(5)
-    os.exit
+    os.exit()
 end
 
 print("Please choose a theme for your client:")
